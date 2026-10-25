@@ -61,11 +61,6 @@ Synthetic customer reviews may be used when suitable real customer reviews are u
 - **Sentiment Misclassification:** The NLP model may incorrectly interpret customer feedback and produce misleading recommendations.
 - **Synthetic Data Bias:** Generated reviews may not accurately represent real customer opinions, affecting recommendation reliability.
 
-## Weekly Progress
-
-| Week | Focus | Deliverable | Status |
-|---|---|---|---|
-| Week 1 | Project Scoping and GitHub Setup | Project Scope, System Map, Observation Sheet, README | In Progress |
 
 ## References
 
