@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "checks": [
+    "source hashes and sizes",
+    "output hashes and sizes",
+    "counts",
+    "source-output mappings",
+    "feature allowlist"
+  ],
+  "scope": "Same-runtime repeatability; execution timestamps intentionally excluded"
+}

@@ -1,0 +1,196 @@
+{
+  "pipeline_version": "zapas-week3-v1.0",
+  "generated_at_utc": "2026-11-02T16:47:41.114850+00:00",
+  "runtime": {
+    "python": "3.11.5",
+    "pandas": "2.2.3",
+    "numpy": "1.26.4"
+  },
+  "records": [
+    {
+      "source_id": "S01",
+      "source_filename": "retail_store_inventory.csv",
+      "source_sha256": "c7b6019887d85e6bb311a76da72560463e6bf269bfadbe4b326fbff3b1000468",
+      "source_size_bytes": 6191463,
+      "prepared_output": "data/processed/prepared_timeseries.csv",
+      "prepared_sha256": "6aac10424c3354b7db5aff6872f394e5a0475e4ef07b4965c26eff9e2d995e17",
+      "size_bytes": 6118362,
+      "processing_note": {
+        "pathway": "F",
+        "time_column": "Date",
+        "frequency": "MS",
+        "keys": [
+          "Store ID",
+          "Product ID"
+        ],
+        "invalid_key_policy": "stop",
+        "duplicate_key_policy": "stop",
+        "missing_sales_policy": "preserve_and_flag",
+        "category_filter": null,
+        "forecast_horizon_months": 1,
+        "minimum_history_months": 3
+      },
+      "source_version": "Local file fingerprint",
+      "access_rights": "Dataset licence not verified; confirm before public redistribution"
+    },
+    {
+      "source_id": "S01",
+      "source_filename": "retail_store_inventory.csv",
+      "source_sha256": "c7b6019887d85e6bb311a76da72560463e6bf269bfadbe4b326fbff3b1000468",
+      "source_size_bytes": 6191463,
+      "prepared_output": "data/processed/monthly_sales_features.csv",
+      "prepared_sha256": "f57225cd76286e73f7c6523b83b904d53a96258afa4c7e16a0e8cb576e322604",
+      "size_bytes": 351374,
+      "processing_note": {
+        "pathway": "F",
+        "time_column": "Date",
+        "frequency": "MS",
+        "keys": [
+          "Store ID",
+          "Product ID"
+        ],
+        "invalid_key_policy": "stop",
+        "duplicate_key_policy": "stop",
+        "missing_sales_policy": "preserve_and_flag",
+        "category_filter": null,
+        "forecast_horizon_months": 1,
+        "minimum_history_months": 3
+      },
+      "source_version": "Local file fingerprint",
+      "access_rights": "Dataset licence not verified; confirm before public redistribution"
+    },
+    {
+      "source_id": "S01",
+      "source_filename": "retail_store_inventory.csv",
+      "source_sha256": "c7b6019887d85e6bb311a76da72560463e6bf269bfadbe4b326fbff3b1000468",
+      "source_size_bytes": 6191463,
+      "prepared_output": "data/processed/validation_report.json",
+      "prepared_sha256": "df0f24246ee2172fa4ad0360a84382aceeeb14f5510458be8821324dff2e13d0",
+      "size_bytes": 1870,
+      "processing_note": {
+        "pathway": "F",
+        "time_column": "Date",
+        "frequency": "MS",
+        "keys": [
+          "Store ID",
+          "Product ID"
+        ],
+        "invalid_key_policy": "stop",
+        "duplicate_key_policy": "stop",
+        "missing_sales_policy": "preserve_and_flag",
+        "category_filter": null,
+        "forecast_horizon_months": 1,
+        "minimum_history_months": 3
+      },
+      "source_version": "Local file fingerprint",
+      "access_rights": "Dataset licence not verified; confirm before public redistribution"
+    }
+  ],
+  "inspection": {
+    "rows": 73100,
+    "columns": [
+      "Date",
+      "Store ID",
+      "Product ID",
+      "Category",
+      "Region",
+      "Inventory Level",
+      "Units Sold",
+      "Units Ordered",
+      "Demand Forecast",
+      "Price",
+      "Discount",
+      "Weather Condition",
+      "Holiday/Promotion",
+      "Competitor Pricing",
+      "Seasonality"
+    ],
+    "dtypes": {
+      "Date": "datetime64[ns]",
+      "Store ID": "object",
+      "Product ID": "object",
+      "Category": "object",
+      "Region": "object",
+      "Inventory Level": "int64",
+      "Units Sold": "int64",
+      "Units Ordered": "int64",
+      "Demand Forecast": "float64",
+      "Price": "float64",
+      "Discount": "int64",
+      "Weather Condition": "object",
+      "Holiday/Promotion": "int64",
+      "Competitor Pricing": "float64",
+      "Seasonality": "object"
+    },
+    "missing_by_column": {
+      "Date": 0,
+      "Store ID": 0,
+      "Product ID": 0,
+      "Category": 0,
+      "Region": 0,
+      "Inventory Level": 0,
+      "Units Sold": 0,
+      "Units Ordered": 0,
+      "Demand Forecast": 0,
+      "Price": 0,
+      "Discount": 0,
+      "Weather Condition": 0,
+      "Holiday/Promotion": 0,
+      "Competitor Pricing": 0,
+      "Seasonality": 0
+    },
+    "date_start": "2022-01-01",
+    "date_end": "2024-01-01",
+    "stores": 5,
+    "products": 20,
+    "series": 100,
+    "categories": [
+      "Clothing",
+      "Electronics",
+      "Furniture",
+      "Groceries",
+      "Toys"
+    ],
+    "duplicate_daily_keys": 0,
+    "invalid_timestamps": 0,
+    "products_with_multiple_categories": 20,
+    "stores_with_multiple_regions": 5,
+    "monthly_rows": 2500,
+    "complete_month_rows": 2400,
+    "incomplete_month_rows": 100,
+    "eligible_rows": 2100,
+    "split_counts": {
+      "train": 1500,
+      "ineligible": 400,
+      "validation": 300,
+      "test": 300
+    },
+    "total_units_sold": 9975582,
+    "raw_preserved": true,
+    "validation": "PASS"
+  },
+  "model_feature_allowlist": [
+    "lag_1",
+    "lag_2",
+    "lag_3",
+    "lag_12",
+    "rolling_mean_3",
+    "rolling_mean_6",
+    "sales_trend",
+    "month_number"
+  ],
+  "source_output_mapping": [
+    {
+      "source": "data/raw/retail_store_inventory.csv",
+      "output": "data/processed/prepared_timeseries.csv"
+    },
+    {
+      "source": "data/raw/retail_store_inventory.csv",
+      "output": "data/processed/monthly_sales_features.csv"
+    },
+    {
+      "source": "data/raw/retail_store_inventory.csv",
+      "output": "data/processed/validation_report.json"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "Original ZIP, extracted CSV and local original bytes match",
+      "status": "PASS"
+    },
+    {
+      "name": "All original rows, values, columns and series retained",
+      "status": "PASS"
+    },
+    {
+      "name": "Independent daily sums match monthly lags and rolling mean",
+      "status": "PASS"
+    },
+    {
+      "name": "Future/current target changes cannot change earlier forecast inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "One store cannot contaminate another store series",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing calendar month stays missing and breaks history eligibility",
+      "status": "PASS"
+    },
+    {
+      "name": "Missing daily sales cannot produce a complete monthly target",
+      "status": "PASS"
+    },
+    {
+      "name": "Five invalid-input cases fail without modifying source",
+      "status": "PASS"
+    },
+    {
+      "name": "Chronological holdouts and partial final-month exclusion",
+      "status": "PASS"
+    },
+    {
+      "name": "Part B/C fingerprints and actual rerun repeatability",
+      "status": "PASS"
+    },
+    {
+      "name": "Self-contained notebook executes in clean workspace and matches CLI exports",
+      "status": "PASS"
+    }
+  ],
+  "limitations": [
+    "Hosted Google Colab UI not exercised",
+    "GitHub publication not performed",
+    "Referenced suffixed uploads not available for comparison",
+    "Not the full NFR4 20-scenario acceptance benchmark"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "Topic 3_Lab.docx": {
+    "sha256": "2c0150479e178b3bbf793f0375ea52bbb0d827e997b12aa6522c3907b8fdacd9",
+    "bytes": 1962724
+  },
+  "archive (13).zip": {
+    "sha256": "194293b4bf66914491c4c56797b3a279f0f072a067e8a4f94921dae6b89b0169",
+    "bytes": 1588139
+  },
+  "week1_project_scope.md.md": {
+    "sha256": "f6d3b93e6c055d755055083c645921b671eb4e03705f3712595728c212804a69",
+    "bytes": 8320
+  },
+  "week2_requirements.md": {
+    "sha256": "9e3fa298cc79c07e60b3e67c65e23674a1e5fe46f3526779a1a479f1efa77a70",
+    "bytes": 8386
+  },
+  "week2_evaluation_criteria.md": {
+    "sha256": "89cdd819c86aa2b7ee523377e552075eda9b60825e186cd8cc8d713031a8090b",
+    "bytes": 4404
+  },
+  "week2_architecture_decisions.md": {
+    "sha256": "19c6eb0440be640542dd47c665f731ba7c1fabc115d0c710da120bf67090b130",
+    "bytes": 5107
+  },
+  "week2_architecture_v1.png": {
+    "sha256": "d8621b5d677dc1333c6b6ff9e207fa3d1e03166abff9a4b0bc61c2fdfb41f1ad",
+    "bytes": 1663291
+  },
+  "retail_store_inventory.csv": {
+    "sha256": "c7b6019887d85e6bb311a76da72560463e6bf269bfadbe4b326fbff3b1000468",
+    "bytes": 6191463
+  }
+}

@@ -1,0 +1,4 @@
+# Preserve exact data bytes so provenance SHA-256 hashes survive Git checkouts.
+data/**/*.csv -text
+data/**/*.json -text
+data/**/*.zip -text

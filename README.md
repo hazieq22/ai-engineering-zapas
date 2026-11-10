@@ -1,3 +1,32 @@
+# Zapas — Monthly Sales Forecasting and Restocking Decision Support
+
+## Current scope — Topic 3
+
+The current project prepares monthly sales forecasting data separately for every Store ID and Product ID. All stores, categories, raw rows and original attributes are retained. Customer reviews, sentiment analysis and complaint analysis are outside the current scope. Restocking remains future human-reviewed decision support, not automatic ordering.
+
+The Topic 3 submission implements data engineering (Pathway F), not model training. Later forecasting experiments are separate and are not included in this submission. The earlier proposal and Week 1/2 documents below may describe a superseded scope.
+
+## Topic 3 — Data engineering pipeline
+
+Zapas now prepares monthly sales by Store ID and Product ID across all stores/categories. All original rows and attributes remain available. Current scope is forecasting and restocking data preparation.
+
+- [Executed pipeline notebook](notebooks/week3_pipeline.ipynb)
+- [Data inventory](docs/week3_data_inventory.md)
+- [Pipeline diagram](docs/week3_pipeline_diagram.png)
+- [Decisions and stage contracts](docs/week3_pipeline_decisions.md)
+- [Part B lineage](data/week3_manifest.json)
+- [Part C pipeline](data/pipeline_v1/timeseries/)
+- [Validation evidence](docs/test_report.json)
+
+Local execution: 73,100 daily rows retained; 2,500 monthly records; 100 partial January 2024 records retained and excluded as full-month targets. Same-input reruns match. Historical features use only prior complete months within each series. This lab does not train or evaluate a forecasting model.
+
+Submission files are stored in the linked repository paths above. See [commit history](https://github.com/hazieq22/ai-engineering-zapas/commits/main/) for publication history. Source licence and equivalence to the suffixed chat uploads remain unverified; see the provenance record.
+
+
+---
+
+## Earlier proposal — retained for history
+
 # Zapas — AI-Based Inventory Demand Forecasting and Customer Review Analysis for Restocking Decision Support
 
 Zapas is an AI-powered decision support system that helps retail businesses forecast product demand, analyse customer reviews, and make better restocking and product improvement decisions.
