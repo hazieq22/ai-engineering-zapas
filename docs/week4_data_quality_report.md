@@ -4,52 +4,52 @@ Sales Forecasting and Inventory Restocking Decision Support | 18 November 2026
 
 ## 1. Project and Data Overview
 
-The project prepares historical retail sales for forecasts that can inform stock decisions. Two Topic 2 requirements guide this audit. FR2 needs dated sales at product and store level, valid monthly targets, and features available before each forecast. RAI1 needs a measure of prior sales history and an eligibility flag so the system can warn users when history is insufficient. This audit checks the flag, not the dashboard warning. The recorded target is units sold. [Topic 2 requirements](week2_requirements.md)
+The project uses historical retail sales to forecast monthly units sold and inform restocking decisions. The audit addresses two Topic 2 requirements. FR2 requires dated sales by store and product, complete monthly sales totals for evaluation, and inputs available at the time of forecasting. RAI1 requires the system to warn users when sales history is insufficient. The audit assessed the data flag that supports this warning. Its display in the dashboard was not verified. [Topic 2 requirements](week2_requirements.md)
 
-Audited asset. Pathway F, Topic 3 Part B, data/processed/monthly_sales_features.csv. Matching manifest: data/week3_manifest.json, pipeline zapas-week3-v1.0, source S01. A fresh SHA-256 check matched both the output and source entries in the manifest. [Manifest](../data/week3_manifest.json)
+The audited file was data/processed/monthly_sales_features.csv, produced in Topic 3 Part B under Pathway F. The corresponding manifest, data/week3_manifest.json, identifies source S01 and pipeline version zapas-week3-v1.0. The SHA-256 hashes of the prepared and source files matched their manifest entries. [Manifest](../data/week3_manifest.json)
 
-Sample. One item is a store–product–month row. The audit examined 16 of 2,500 rows across two contiguous eight-month windows: S001/P0001, January–August 2022, and S005/P0020, June 2023–January 2024. The windows cover the period when sales history was limited and the incomplete final month. Both validation rules cover all rows.
+Each row represents one product at one store in one calendar month. The audit examined 16 of 2,500 rows in two consecutive eight-month windows, January to August 2022 for S001/P0001 and June 2023 to January 2024 for S005/P0020. The windows were selected to include months with limited prior history and the incomplete final month. Both validation rules were applied to the full dataset.
 
 ## 2. Five-Dimension Quality Scorecard
 
 | Dimension | Observed finding and evidence | Impact and status |
 |---|---|
-| Completeness | S005/P0020 has 1 of 31 days in January 2024 and a blank monthly target. V1 found the same partial-month pattern in all 100 January rows. | Warning: retain partial sales separately and exclude them as complete targets. |
-| Consistency | In the raw data, all 20 product IDs appear under more than one category and all 5 store IDs under more than one region. | Review: category and region cannot be treated as fixed attributes of these IDs. |
-| Accuracy | S001/P0001 in April 2022 reconciles to 4,874 units across 30 daily records. V1 matched all monthly totals to the source. | Pass for source reconciliation. Accuracy against real transactions is N.V. because no independent records were available. |
-| Timeliness | Latest observation: 1 January 2024. Latest complete month: December 2023. | Warning: supports historical experiments. Current stock and current sales coverage are N.V. |
-| Uniqueness | Zero duplicate store–product–month keys and zero missing key fields across 2,500 prepared rows. | Pass: one row per forecast series per month. |
+| Completeness | All 100 January 2024 rows contained sales for only one of 31 days and had no full-month target, including S005/P0020. | Warning. The recorded sales are retained, but the partial totals are excluded from full-month evaluation. |
+| Consistency | Each of the 20 product IDs was associated with multiple categories. Each of the five store IDs was associated with multiple regions. | Review. Analysis by category or region requires a verified mapping. |
+| Accuracy | The 30 daily records for S001/P0001 in April 2022 summed to the reported 4,874 units. All monthly totals matched the source under V1. | Pass for agreement with the source. Accuracy against actual transactions is N.V. because independent records were unavailable. |
+| Timeliness | The latest observation was 1 January 2024. December 2023 was the last complete month. | Warning. The records support historical analysis. Current sales and stock levels are N.V. |
+| Uniqueness | None of the 2,500 prepared rows had a duplicate key or a missing store, product or month value. | Pass. Each store and product combination has one row per month. |
 
 ## 3. Validation Findings
 
-V1 — Source reconciliation and target completeness (FR2). Regroup daily sales by store, product and calendar month. Require totals, observed days, days with sales values and last dates to agree with the export. A target must equal the source total when every day is present with a sales value and be blank otherwise. 2,500 tested, 2,500 passed, 0 failed. A future mismatch blocks the affected export until reconciled.
+V1. Source reconciliation and target completeness (FR2). Daily sales were regrouped by store, product and calendar month. Monthly sales totals, day counts and the last observed dates were compared with the prepared file. A monthly target was expected only when every day had a recorded sales value. All 2,500 rows passed. A discrepancy in a future export would require reconciliation before use.
 
-V2 — Past sales features and history flag (FR2, RAI1). Recompute the first three lags, three-month rolling mean and sales trend from prior complete months within each series. Require the history flag to reflect three available preceding months and training eligibility to additionally require a complete target month. 2,500 tested, 2,500 passed, 0 failed. A feature mismatch blocks model input. Insufficient history must produce a warning. Display of that warning is N.V. because this audit examined the prepared CSV.
+V2. Historical sales features and eligibility (FR2, RAI1). The first three monthly lags, three-month rolling mean and sales trend were recalculated from earlier complete months within each series. The history flag required three preceding complete months. Eligibility for model development and evaluation also required a complete target month. All 2,500 rows passed. A feature mismatch would prevent the affected data from being used as model input. The dashboard warning is N.V. because the audit covered the prepared file only.
 
 ## 4. Duplicate, Anomaly and Coverage Findings
 
-No duplicate daily keys were found across 73,100 source rows. The 100 series have all 25 expected calendar rows. The incomplete final month and early history gaps in feature eligibility were retained with flags.
+The 73,100 daily source rows contained no duplicate store, product and date combinations. All 100 sales series contained the expected 25 monthly rows. The prepared data distinguish early months with insufficient prior history from the final month, which has enough prior history but an incomplete target.
 
 | Case | Observed coverage | Implication |
 |---|---|---|
-| Complete history, January 2022–December 2023 | 2,400 complete rows across 100 series. The first three months give 300 rows with valid sales but insufficient prior history. The remaining 2,100 are eligible. | Supports chronological forecast experiments and tests of the insufficient-history flag. |
-| Partial month, January 2024 | 100 rows with one day each and no complete targets. All 100 have enough prior history to populate the history flag. | Supports checking forecast inputs and partial-month handling. Full January actuals are unavailable for scoring. |
+| January 2022 to December 2023 | All 2,400 rows had complete monthly targets. The first 300 lacked three prior months of history. The remaining 2,100 met both eligibility conditions. | Provides data for chronological evaluation and examples of insufficient history. |
+| January 2024 | All 100 rows met the history requirement and contained only one day of sales. | The prior history can support forecast inputs. A complete January sales total is unavailable for evaluating forecast accuracy. |
 
 ## 5. Bias Assessment
 
-Inferred measurement risk. The source records units sold. If an item ran out, unmet purchases would not appear in sales records. A model trained on these records could understate future sales when stock is available, which may lead to a low restocking suggestion. The size of this effect is N.V. because stockout events and unmet demand are not independently recorded. Describe outputs as sales forecasts, and compare errors for confirmed stockout and in-stock periods when such records become available.
+Stock availability is a potential source of measurement bias. Recorded sales count completed transactions. During a stockout, some customers who would have purchased a product may be unable to do so. A model trained on sales from those periods may underestimate future sales when the product is available, leading to a lower restocking quantity than required. The extent of this bias is N.V. because the audit had no independently verified records of stockouts or lost sales. The proposed control is to label predictions as forecasts of recorded sales and compare forecast errors across periods with verified differences in stock availability when suitable records are available.
 
 ## 6. Privacy, Rights and Governance
 
-S01 came from the supplied local archive. Its SHA-256 identifies the exact audited bytes. The inventory attributes it to a Kaggle source, but the upstream release, collection basis, synthetic or operational status, and permission for use and redistribution are N.V. The inspected schema has store/product codes and operational fields. It has no direct customer identifiers. Consent or ownership cannot be inferred from the schema.
+Source S01 was obtained from the supplied archive. Its SHA-256 hash identifies the exact version used in the audit. The data inventory records a Kaggle attribution. The upstream release, basis for collection, status as synthetic or operational data, and permissions for use and redistribution are N.V. The data fields examined contain store and product codes and operational values, with no direct customer identifiers. Ownership and any applicable consent arrangements remain unverified.
 
-This report uses aggregate audit results and does not include a copy of the source dataset. The audit identified source permissions and existing repository exposure as unresolved governance issues. Access-controlled storage is the planned safeguard for data with unclear sharing rights. Changes to the source, scope, preparation logic or permissions will trigger another audit. [Data inventory](week3_data_inventory.md)
+The report presents aggregate checks and limited examples. The proposed safeguard is restricted storage for data whose sharing rights remain unclear. The existing repository copies are included in the permissions review. Changes to the source, preparation steps, intended use or permissions will trigger revalidation. [Data inventory](week3_data_inventory.md)
 
 ## 7. Mitigation and Impact on Requirements
 
-1. Source permissions. The planned permissions review covers the exact dataset release, its permitted uses and access to existing repository data. The outcome will determine which evidence can be used or shared for FR2 and RAI1.
-2. Readiness for a live trial. A live trial requires recent, authorised sales and dated stock records. The trial preparation includes repeating V1 and V2 and testing system responses to insufficient history and missing or outdated stock figures. These checks address data freshness for FR2 and the warning required by RAI1. Unrecorded lost sales and changes in category or region labels remain risks.
+1. Before further distribution, the student researcher will verify the dataset release and its terms of use and review access to existing repository copies. The outcome will establish which data may be used or shared as evidence for FR2 and RAI1.
+2. Before a live trial, the student researcher will obtain recent, authorised sales and dated stock records, repeat V1 and V2, and test the system with insufficient sales history and missing or outdated stock information. These checks address data freshness for FR2 and warning behaviour for RAI1. Unrecorded lost sales and inconsistent category or region labels remain risks.
 
 ## 8. Quality-Gate Decision
 
-GO WITH CONDITIONS — historical coursework evaluation on the audited Pathway F output, subject to permission for that use. The two file hashes match the manifest and both rules passed for all 2,500 rows. The 2,100 eligible rows can support chronological experiments with the documented history rule. The latest observation and missing full January targets prevent current stock decisions or January accuracy claims. Re-review before expanding use, after obtaining permission and fresh records, or when the source version or feature logic changes. Forecast accuracy and operational suitability require separate evaluation.
+GO WITH CONDITIONS applies to historical coursework evaluation using the audited Pathway F output, subject to permission for that use. Both file hashes matched the manifest, both validation rules passed across all 2,500 rows, and 2,100 rows met the eligibility criteria for chronological evaluation. The incomplete January results cannot be used to assess full-month forecast accuracy, and current stock decisions require recent sales and dated stock records. The decision will be reviewed when source permissions are established, new records become available or the source version or feature logic changes. Forecast performance and suitability for operational use require separate evaluation.
