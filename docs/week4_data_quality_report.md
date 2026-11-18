@@ -47,8 +47,8 @@ The report presents aggregate checks and limited examples. The proposed safeguar
 
 ## 7. Mitigation and Impact on Requirements
 
-1. Before further distribution, the student researcher will verify the dataset release and its terms of use and review access to existing repository copies. The outcome will establish which data may be used or shared as evidence for FR2 and RAI1.
-2. Before a live trial, the student researcher will obtain recent, authorised sales and dated stock records, repeat V1 and V2, and test the system with insufficient sales history and missing or outdated stock information. These checks address data freshness for FR2 and warning behaviour for RAI1. Unrecorded lost sales and inconsistent category or region labels remain risks.
+1. Dataset permissions. Further distribution depends on verifying the dataset release and its terms of use and reviewing access to existing repository copies. This establishes which data may be used for forecast evaluation under FR2 and for testing the sales history warning under RAI1.
+2. Data freshness and warning tests. A live trial requires recent, authorised sales records and dated stock records. Repeating V1 and V2 checks whether the new sales data are suitable for forecasting under FR2. Tests with short sales histories check whether the RAI1 warning appears when required. Separate tests with missing or outdated stock records check whether the system withholds restocking suggestions when stock information is inadequate. Lost sales during stockouts and inconsistent category or region labels remain limitations.
 
 ## 8. Quality-Gate Decision
 
