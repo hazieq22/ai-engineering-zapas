@@ -97,3 +97,9 @@ Synthetic customer reviews may be used when suitable real customer reviews are u
 - Fildes, R., Ma, S., & Kolassa, S. (2022). Retail forecasting: Research and practice. *International Journal of Forecasting, 38*(4), 1283–1318. https://doi.org/10.1016/j.ijforecast.2019.06.004
 - Makridakis, S., Spiliotis, E., & Assimakopoulos, V. (2022). M5 accuracy competition: Results, findings, and conclusions. *International Journal of Forecasting, 38*(4), 1346–1364. https://doi.org/10.1016/j.ijforecast.2021.11.013
 - Zhang, M., Sun, L., Wang, G. A., Li, Y., & He, S. (2022). Using neutral sentiment reviews to improve customer requirement identification and product design strategies. *International Journal of Production Economics, 254*, 108641. https://doi.org/10.1016/j.ijpe.2022.108641
+
+## Topic 4 - Data quality and responsible data practices
+
+- [Data Quality & Bias Report](docs/week4_data_quality_report.md)
+- **GO WITH CONDITIONS** for historical coursework evaluation, subject to permission for that use.
+- **Outstanding actions** — verify the exact dataset release and sharing rights, review existing data exposure, then obtain recent authorised sales and dated stock records and retest validation and warnings before any live trial.
