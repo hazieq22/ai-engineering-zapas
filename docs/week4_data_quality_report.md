@@ -6,9 +6,9 @@ Sales Forecasting and Inventory Restocking Decision Support | 18 November 2026
 
 The project prepares historical retail sales for forecasts that can inform stock decisions. Two Topic 2 requirements guide this audit. FR2 needs dated sales at product and store level, valid monthly targets, and features available before each forecast. RAI1 needs a measure of prior sales history and an eligibility flag so the system can warn users when history is insufficient. This audit checks the flag, not the dashboard warning. The recorded target is units sold. [Topic 2 requirements](week2_requirements.md)
 
-Audited asset. Pathway F, Topic 3 Part B, `data/processed/monthly_sales_features.csv`. Matching manifest: `data/week3_manifest.json`, pipeline `zapas-week3-v1.0`, source S01. A fresh SHA-256 check matched both the output and source entries in the manifest. [Manifest](../data/week3_manifest.json)
+Audited asset. Pathway F, Topic 3 Part B, data/processed/monthly_sales_features.csv. Matching manifest: data/week3_manifest.json, pipeline zapas-week3-v1.0, source S01. A fresh SHA-256 check matched both the output and source entries in the manifest. [Manifest](../data/week3_manifest.json)
 
-Sample. One item is a store–product–month row. I inspected 16 of 2,500 items using two contiguous eight-month windows: S001/P0001, January–August 2022, and S005/P0020, June 2023–January 2024. This deliberately includes early history and the incomplete final month. It is a diagnostic sample. The validation rules below cover all rows.
+Sample. One item is a store–product–month row. The audit examined 16 of 2,500 rows across two contiguous eight-month windows: S001/P0001, January–August 2022, and S005/P0020, June 2023–January 2024. The windows cover the period when sales history was limited and the incomplete final month. Both validation rules cover all rows.
 
 ## 2. Five-Dimension Quality Scorecard
 
@@ -47,8 +47,8 @@ This report uses aggregate audit results and does not include a copy of the sour
 
 ## 7. Mitigation and Impact on Requirements
 
-1. Verify source permissions before further sharing. I will identify the exact source release, document the permitted uses, and review access to the existing repository data. These findings will determine which evidence can be used or shared for FR2 and RAI1.
-2. Check data and warning behaviour before a live trial. I will obtain recent, authorised sales and dated stock records, repeat V1 and V2, and test how the system responds to insufficient history and missing or outdated stock figures. This addresses data freshness for FR2 and the warning required by RAI1. Unrecorded lost sales and changes in category or region labels remain risks.
+1. Source permissions. The planned permissions review covers the exact dataset release, its permitted uses and access to existing repository data. The outcome will determine which evidence can be used or shared for FR2 and RAI1.
+2. Readiness for a live trial. A live trial requires recent, authorised sales and dated stock records. The trial preparation includes repeating V1 and V2 and testing system responses to insufficient history and missing or outdated stock figures. These checks address data freshness for FR2 and the warning required by RAI1. Unrecorded lost sales and changes in category or region labels remain risks.
 
 ## 8. Quality-Gate Decision
 
